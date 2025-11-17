@@ -61,7 +61,7 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_rule" {
 resource "aws_instance" "example" {
   ami = data.aws_ami.ubuntu.id
   instance_type = var.aws_instance_type
-  security_groups = [aws_security_group.allow_ssh.id]
+  vpc_security_group_ids = [aws_security_group.allow_ssh.id]
 
   tags = {
     Name = var.username
