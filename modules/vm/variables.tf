@@ -27,3 +27,8 @@ variable "tags" {
     type        = map(string)
     default     = {}
 }
+
+variable "key_name" {
+    description = "The name for the SSH key pair"
+    type        = string
+}
