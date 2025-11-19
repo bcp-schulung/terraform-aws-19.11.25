@@ -60,3 +60,13 @@ module "participant_iam" {
   name       = each.value.name
   policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
 }
+
+module "db" {
+  source     = "./modules/db"
+  security_group = aws_default_vpc.default.id
+}
+
+/**output "dboutput2" {
+  description = "db output"
+  value = module.db.passwordTestOutput
+}**/
