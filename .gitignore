@@ -9,4 +9,5 @@ override.tfvars
 .terraformrc
 terraform.rc
 ```
-/terraform-aws-19.11.25.iml
+*.iml
+*.idea/
