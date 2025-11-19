@@ -8,6 +8,11 @@ override.tfvars
 *_override.tfvars
 .terraformrc
 terraform.rc
+
+# SSH private keys
+keys/
+*.pem
+*.key
 ```
 *.iml
 *.idea/

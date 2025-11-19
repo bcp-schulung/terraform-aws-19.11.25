@@ -4,6 +4,14 @@ terraform {
         source = "hashicorp/aws"
         version = "6.21.0"
     }
+    tls = {
+        source = "hashicorp/tls"
+        version = "~> 4.0"
+    }
+    local = {
+        source = "hashicorp/local"
+        version = "~> 2.0"
+    }
   }
 }
 
@@ -29,6 +37,7 @@ module "vm" {
 
   count = 3
 
+  key_name = "${var.username}-${count.index}"
   tags = {
     Name = "${var.username}-${count.index}"
   }
