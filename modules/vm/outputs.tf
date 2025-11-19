@@ -1,11 +1,13 @@
+# TODO FIX THIS LATER [*]
 output "instance_id" {
   description = "The ID of the EC2 instance"
-  value       = aws_instance.example.id
+  value       = aws_instance.example[*].id
 }
 
+# TODO FIX THIS LATER [*]
 output "public_ip" {
   description = "The public IP address of the instance"
-  value       = aws_instance.example.public_ip
+  value       = aws_instance.example[*].public_ip
 }
 
 output "private_key_pem" {
@@ -30,7 +32,8 @@ output "private_key_path" {
   value       = local_file.private_key.filename
 }
 
+# TODO FIX THIS LATER [*]
 output "ssh_command" {
   description = "SSH command to connect to the instance"
-  value       = "ssh -i ${local_file.private_key.filename} ubuntu@${aws_instance.example.public_ip}"
+  value       = "ssh -i ${local_file.private_key.filename} ubuntu@${aws_instance.example[*].public_ip}"
 }

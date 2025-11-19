@@ -32,3 +32,9 @@ variable "key_name" {
     description = "The name for the SSH key pair"
     type        = string
 }
+
+variable "participants_count" {
+    description = "participants_count"
+    type        = number
+    default = 1
+}

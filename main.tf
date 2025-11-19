@@ -26,20 +26,24 @@ resource "aws_default_vpc" "default" {
 }
 
 module "security_group" {
+  for_each = { for idx, partic in var.participants : idx => partic }
+
   source = "./modules/security_group"
-  name = var.username
+  name = each.value.name
   vpc_id = aws_default_vpc.default.id
   cidr_block = aws_default_vpc.default.cidr_block
 }
 
 module "vm" {
+  for_each = { for idx, partic in var.participants : idx => partic }
+
   source = "./modules/vm"
 
-  count = 3
+  participants_count = each.value.instanceCount
 
-  key_name = "${var.username}-${count.index}"
+  key_name = each.value.name
   tags = {
-    Name = "${var.username}-${count.index}"
+    Name = each.value.name
   }
-  security_groups = [module.security_group.id]
+  security_groups = [module.security_group[each.value.name].id]
 }

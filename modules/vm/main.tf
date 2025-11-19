@@ -37,10 +37,12 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "example" {
+  count                  = var.participants_count
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = var.type
   vpc_security_group_ids = var.security_groups
   key_name               = aws_key_pair.ssh_key.key_name
+  
 
   tags = merge(
     {
