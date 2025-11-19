@@ -45,5 +45,5 @@ module "vm" {
   tags = {
     Name = each.value.name
   }
-  security_groups = [module.security_group[each.value.name].id]
+  security_groups = [module.security_group[each.key].id]
 }

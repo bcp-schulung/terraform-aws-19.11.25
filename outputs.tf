@@ -1,7 +1,7 @@
 output "vm_ssh_commands" {
   description = "SSH commands to connect to each VM"
   value = {
-    for idx, vm in module.vm : idx => vm.ssh_command
+    for idx, vm in module.vm : idx => vm.ssh_commands
   }
 }
 

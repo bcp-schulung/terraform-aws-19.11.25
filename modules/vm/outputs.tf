@@ -32,8 +32,7 @@ output "private_key_path" {
   value       = local_file.private_key.filename
 }
 
-# TODO FIX THIS LATER [*]
-output "ssh_command" {
-  description = "SSH command to connect to the instance"
-  value       = "ssh -i ${local_file.private_key.filename} ubuntu@${aws_instance.example[*].public_ip}"
+output "ssh_commands" {
+  description = "SSH commands to connect to the instances"
+  value       = [for instance in aws_instance.example : "ssh -i ${local_file.private_key.filename} ubuntu@${instance.public_ip}"]
 }
