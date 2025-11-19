@@ -44,6 +44,12 @@ module "vm" {
   key_name = each.value.name
   tags = {
     Name = each.value.name
+    participant_key = each.key
+   # participant_value = tostring(each.value) 
+    Security_id = module.security_group[each.key].id
+   # Security_all_id = module.security_group[*]
+    Region = var.aws_region
+    vpc_id = aws_default_vpc.default.id
   }
   security_groups = [module.security_group[each.key].id]
 }

@@ -45,8 +45,9 @@ resource "aws_instance" "example" {
   
 
   tags = merge(
-    {
+    { 
       Terraform = "true"
+      Instance = count.index
     },
     var.tags
   )
