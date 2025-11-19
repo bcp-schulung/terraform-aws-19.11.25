@@ -1,16 +1,16 @@
 terraform {
   required_providers {
     aws = {
-        source = "hashicorp/aws"
-        version = "6.21.0"
+      source  = "hashicorp/aws"
+      version = "6.21.0"
     }
     tls = {
-        source = "hashicorp/tls"
-        version = "~> 4.0"
+      source  = "hashicorp/tls"
+      version = "~> 4.0"
     }
     local = {
-        source = "hashicorp/local"
-        version = "~> 2.0"
+      source  = "hashicorp/local"
+      version = "~> 2.0"
     }
   }
 }
@@ -26,16 +26,16 @@ resource "aws_default_vpc" "default" {
 }
 
 module "security_group" {
-  for_each = { for idx, partic in var.participants : idx => partic }
+  for_each = {for idx, partic in var.participants : idx => partic}
 
-  source = "./modules/security_group"
-  name = each.value.name
-  vpc_id = aws_default_vpc.default.id
+  source     = "./modules/security_group"
+  name       = each.value.name
+  vpc_id     = aws_default_vpc.default.id
   cidr_block = aws_default_vpc.default.cidr_block
 }
 
 module "vm" {
-  for_each = { for idx, partic in var.participants : idx => partic }
+  for_each = {for idx, partic in var.participants : idx => partic}
 
   source = "./modules/vm"
 
@@ -43,13 +43,20 @@ module "vm" {
 
   key_name = each.value.name
   tags = {
-    Name = each.value.name
+    Name   = each.value.name
     participant_key = each.key
-   # participant_value = tostring(each.value) 
+    # participant_value = tostring(each.value)
     Security_id = module.security_group[each.key].id
-   # Security_all_id = module.security_group[*]
+    # Security_all_id = module.security_group[*]
     Region = var.aws_region
     vpc_id = aws_default_vpc.default.id
   }
   security_groups = [module.security_group[each.key].id]
+}
+
+module "participant_iam" {
+  for_each   = {for idx, partic in var.participants : idx => partic}
+  source     = "./modules/iam_user_with_role"
+  name       = each.value.name
+  policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
 }
