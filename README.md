@@ -19,11 +19,11 @@ Für **jeden Teilnehmer** sollen automatisiert folgende Ressourcen erstellt werd
    - Berechtigungen so definieren, dass der Teilnehmer **auf alle für ihn vorgesehenen Ressourcen zugreifen kann, aber nicht auf die anderer Teilnehmer**
 
 3. **Datenbankzugang**
-   - Eine eigene Datenbank pro Teilnehmer anlegen (z. B. RDS oder Aurora Serverless)
-   - Der Teilnehmer darf **ausschließlich Zugriff auf seine Datenbank** haben
+   - Eine eigene Datenbank für die Teilnehmer anlegen (z. B. RDS oder Aurora Serverless)
+   - Die Teilnehmer darf **ausschließlich Zugriff auf diese Datenbank** haben
 
 4. **Container-Anwendung**
-   - Eine **Nginx-Webanwendung** wird pro Teilnehmer als **AWS Fargate-Service (ECS)** bereitgestellt
+   - Eine **Nginx-Webanwendung** wird für die Teilnehmer als **AWS Fargate-Service (ECS)** bereitgestellt
    - Die Anwendung soll erreichbar sein, z. B. durch einen Application Load Balancer
 
 ---

@@ -3,9 +3,11 @@ variable "aws_region" {
   type        = string
 }
 
-variable "username" {
-  type = string
-  default = "ben"
+variable "participants" {
+  description = "The participants in the exercise"
+  type = list(object({
+    name = string
+    instanceCount = number
+  }))
+  default = []
 }
-
-#test
