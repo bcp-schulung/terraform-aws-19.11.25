@@ -14,4 +14,5 @@ keys/
 *.pem
 *.key
 ```
-/terraform-aws-19.11.25.iml
+*.iml
+*.idea/
